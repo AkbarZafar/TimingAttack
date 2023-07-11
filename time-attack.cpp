@@ -72,8 +72,8 @@ void warmup() {
 }
 
 char find_letter(std::string currentGuess){
-    // double Z = 1.960; // 95%
-    double Z = 1.150; // 75%
+    double Z = 1.960; // 95%
+    // double Z = 1.150; // 75%
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine e(seed);
     std::vector<char> letterList{
@@ -110,7 +110,6 @@ char find_letter(std::string currentGuess){
         std::unordered_map<char, double> varianceMap = calculate_variance(meanMap, count, sumSquares);
         letter = compute_confidence_intervals(meanMap, varianceMap, Z, count);
     }while(count < (1000) || letter == '\0');
-    std::cout<<count<<std::endl;
 
     return letter;
 }
@@ -127,7 +126,7 @@ std::string crack_password() {
             warmup();
         }
     }
-
+    
     return currentGuess;
 }
 
